@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Enter Your Details For Our Dating Website</title>  
+        <style>
+            body{
+                font-family: Verdana, Arial, sans-serif;
+            }
+            p{
+                margin:0;
+            }
+            legend{
+                background:purple;
+                border-radius:10px;
+                color:white;
+                padding:12px;
+            }
+            fieldset{
+                background:lavender;
+                border:10px solid darkblue;
+                border-radius: 20px;
+                margin-bottom:10px;
+                width:720px;
+            }
+            div{
+                margin:10px;
+            }
+            label{
+                display:inline-block;
+                text-align:right;
+                vertical-align: top;
+                width:200px;
+            }
+            input[type="radio"]+label, input[type="checkbox"]+label{
+                width:auto;
+            }
+            .range-caption{
+                background:darkcyan;
+                color:White;
+                padding:6px;
+                text-align:center;
+            }
+            input[type^="submit"]{
+                background:darkcyan;
+                border-radius:10px;
+                color:white;
+                font-size:20px;
+                padding:12px;
+            }
+            div:hover{
+                color:blue;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>
+            Enter Your Details For Our Dating Website
+        </h1>
+        <form action="https://us-central1-nucamp-production.cloudfunctions.net/post/formdata" method="post" enctype="multipart/form-data">
+            <fieldset>
+                <legend>Your Face</legend>
+                <div>
+                    <!--Photo upload-->
+                    <label for="avatar"Upload Your Image></label>
+                    <input type="file" id="avatar" name="avatar"/>
+                </div>
+                <p>
+                    Image Preview:
+                    <img id="preview" width="500"/>
+                </p>
+            </fieldset>
+            <fieldset>
+                <legend>Your Details</legend>
+                <div>
+                    <label for="name" Your Name></label>
+                    <input type="text" name="name" id="name" placeholder="Your Full Name" required>
+                </div>
+                <div>
+                    <label>Gender</label> 
+                    <input type="radio" id="woman" name="gender" value="woman" required/>
+                    <label for="woman">Woman</label>
+                    <input type="radio" id="man" name="gender" value="man"/>
+                    <label for="man">Man</label>
+                    <input type="radio" id="transmale" name="gender" value="transmale"/>
+                    <label for="transmale">Trans Male</label>
+                    <input type="radio" id="transfemale" name="gender" value="transfemale"/>
+                    <label for="transfemale">Trans Female</label>
+                    <input type="radio" id="nonbinary" name="gender" value="nonbinary"/>
+                    <label for="nonbinary">Non-Binary</label>
+                </div>
+                <div>
+                    <label for="age">Age</label>
+                    <input type="number" name="age" id="age"/>
+                </div>
+                <div>
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" name="dob" id="dob"/>
+                </div>
+                <div>
+                    <label for="color">Favorite Color</label>
+                    <input type="color" name="color" id="color"/>
+                </div>
+                <div>
+                    <label for="country">Country</label>
+                    <select id="country" name="country" required>
+                        <option disabled selected value=""> Choose a Country</option>
+                        <option value="brazil">Brazil</option>
+                        <option value="france">France</option>
+                        <option value="japan">Japan</option>
+                        <option value="libya">Libya</option>
+                        <option value="usa">U.S.A.</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="salary">Salary</label>
+                    <span class="range-caption">Poor</span>
+                    <input type="range" id="salary" name="salary" min="0" max="100" value="50"/>
+                    <span class="range-caption">Rich</span>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Your Contact Information</legend>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email"/>
+                </div>
+                <div>
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone"/>
+                </div>
+                <div>
+                    <label for="address">Address:</label>
+                    <textarea cols="40" id="address" name="address">
+
+                    </textarea>
+                </div>
+                <div>
+                    <label>Contact Method(s)</label>
+                    <input type="checkbox" id="emailCheckbox" name="contact"/>
+                    <label for="emailCheckbox">Email</label>
+                    <input type="checkbox" id="phoneCheckbox" name="contact"/>
+                    <label for="phoneCheckbox">Phone</label>
+                </div>
+            </fieldset>
+            <div>
+            <input type="submit"/>
+            </div>
+       </form>
+       <script src="https://url.nucamp.co/datingjs"></script>
+    </body>
+</html>

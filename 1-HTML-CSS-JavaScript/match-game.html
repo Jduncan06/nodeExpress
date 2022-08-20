@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Matching Game</title>
+    <style>
+      img {
+        position: absolute;
+      }
+      div {
+        position: absolute;
+        width: 500px;
+        height: 500px;
+      }
+      #rightSide {
+        left: 500px;
+        border-left: 1px solid;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Matching Game</h1>
+    <p>Click on the extra smiling face on the left</p>
+    <button id="restartButton" onClick="window.location.reload()" type="button">
+      Restart
+    </button>
+    <div id="leftSide"></div>
+    <div id="rightSide"></div>
+    <script>
+      window.addEventListener("load", chooseDifficulty);
+      window.addEventListener("load", generateFaces);
+
+      let numberOfFaces = 0;
+      const theLeftSide = document.querySelector("#leftSide");
+      const theRightSide = document.querySelector("#rightSide");
+      let counter = 0;
+      const btn = document.querySelector("#restartGame");
+      function generateFaces() {
+        for (let i = 0; i < numberOfFaces; i++) {
+          const face = document.createElement("img");
+          face.src = "images/smile.png";
+
+          let randomTop = Math.floor(Math.random() * 400);
+          let randomLeft = Math.floor(Math.random() * 400);
+
+          face.style.top = randomTop + "px";
+          face.style.left = randomLeft + "px";
+          theLeftSide.appendChild(face);
+        }
+        const leftSideImages = theLeftSide.cloneNode(true);
+        leftSideImages.removeChild(leftSideImages.lastChild);
+        theRightSide.appendChild(leftSideImages);
+        theLeftSide.lastChild.addEventListener("click", nextLevel);
+        document.body.addEventListener("click", gameOver);
+      }
+
+      function nextLevel(event) {
+        event.stopPropagation();
+        numberOfFaces += numberOfFaces;
+        counter += 1;
+
+        while (theLeftSide.firstChild) {
+          theLeftSide.removeChild(theLeftSide.firstChild);
+        }
+        while (theRightSide.firstChild) {
+          theRightSide.removeChild(theRightSide.firstChild);
+        }
+        generateFaces();
+      }
+
+      function gameOver() {
+        alert("Game Over!\n\n You correctly picked " + counter + " times!");
+        theLeftSide.lastChild.removeEventListener("click", nextLevel);
+        document.body.removeEventListener("click", gameOver);
+      }
+      function chooseDifficulty() {
+        let difficulty = prompt(
+          "Choose difficulty \n\n Easy, Medium, or Hard?"
+        );
+        difficulty.toLowerCase;
+        if (difficulty === "easy") {
+          numberOfFaces = 1;
+        } else if (difficulty === "medium") {
+          numberOfFaces = 5;
+        } else {
+          numberOfFaces = 10;
+        }
+      }
+    </script>
+  </body>
+</html>

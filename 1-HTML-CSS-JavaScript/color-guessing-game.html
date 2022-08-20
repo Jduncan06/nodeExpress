@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Color Guessing Game</title>
+        <style>
+            body{
+                font-family: Verdana, Arial, sans-serif;
+                align-items: center;
+            }
+            button{
+                background: teal;
+                color: white;
+                font-size: 20px;
+                padding: 12px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Color Guessing Game</h1>
+        <button type="button" onclick="runGame()">Start Game</button>
+      <script>
+        const COLORS_ARRAY =["yellow","blue","gray","green","magenta","gold", "orange", "red","cyan", "white", ]
+        function runGame(){
+            let guess = "";
+            let correct = false;
+            const targetIndex = Math.floor(Math.random() * COLORS_ARRAY.length) - 1;
+            const target = COLORS_ARRAY[targetIndex];
+            let numTries = 0;
+            console.log(target);
+            do{
+                COLORS_ARRAY.sort();
+                numTries += 1;
+                guess = prompt("I am thinking of one of these colors:\n\n" + COLORS_ARRAY.join(", ") +
+"\n\nWhat color am I thinking of?\n\nThis is guess number " + numTries);
+               
+                if(guess===null){
+                    alert("You have quit the game");
+                    return;
+                }
+                correct = checkGuess(guess, target);
+            }while(!correct);
+            alert("Congratulations! You guessed the color!\n\nYou guessed it in " + numTries + " guesses");
+            document.body.style.background = guess;
+        }
+        function checkGuess(guess, target){
+            let correct = false;
+            
+            if(!(COLORS_ARRAY.includes(guess.toLowerCase()))){
+                alert("You did not choose one of the listed colors\n\nPlease pick a color from the list")
+            }else if(guess.toLowerCase() > target){
+                alert("your guess is higher alphabetically than the color");
+            }else if(guess.toLowerCase() < target){
+                alert("your guess is lower alphabetically than the color");
+            }else{
+                correct = true;
+            }
+            return correct;
+        }
+      </script>
+    </body>
+</html>
