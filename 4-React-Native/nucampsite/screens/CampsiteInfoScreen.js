@@ -5,6 +5,7 @@ import { toggleFavorite } from "../features/favorites/favoritesSlice";
 import { useState } from "react";
 import { Rating, Input } from "react-native-elements";
 import { postComment } from "../features/comments/commentsSlice";
+import * as Animatable from "react-native-animatable";
 
 const CampsiteInfoScreen = ({ route }) => {
   const comments = useSelector((state) => state.comments);
@@ -17,8 +18,6 @@ const CampsiteInfoScreen = ({ route }) => {
   const dispatch = useDispatch();
   const { campsite } = route.params;
 
-
-
   const handleSubmit = () => {
     const newComment = {
       author,
@@ -26,7 +25,7 @@ const CampsiteInfoScreen = ({ route }) => {
       text,
       campsiteId: campsite.id,
     };
-    dispatch(postComment(newComment))
+    dispatch(postComment(newComment));
     setShowModal(!showModal);
   };
 
@@ -46,13 +45,19 @@ const CampsiteInfoScreen = ({ route }) => {
           startingValue={rating}
           imageSize={10}
         />
-        <Text style={{ fontSize: 12 }}>{`-- ${item.author} -- ${item.date} `}</Text>
+        <Text
+          style={{ fontSize: 12 }}
+        >{`-- ${item.author} -- ${item.date} `}</Text>
       </View>
     );
   };
 
   return (
-    <>
+    <Animatable.View
+      animation='fadeInUp'
+      duration={2000}
+      delay={1000}
+    >
       <FlatList
         data={comments.commentsArray.filter(
           (comment) => comment.campsiteId === campsite.id
@@ -123,7 +128,7 @@ const CampsiteInfoScreen = ({ route }) => {
           </View>
         </View>
       </Modal>
-    </>
+    </Animatable.View>
   );
 };
 
